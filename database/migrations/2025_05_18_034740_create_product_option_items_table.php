@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('product_option_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_option_id')->constrained();
-            $table->string('name');
+            $table->json('name');
             $table->timestamps();
         });
     }

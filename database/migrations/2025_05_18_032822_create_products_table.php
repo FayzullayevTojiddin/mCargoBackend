@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('restaurant_id')->constrained();
             $table->foreignId('product_category_id')->constrained();
             $table->decimal('review', 2, 1)->nullable();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->json('name');
+            $table->json('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->string('icon')->nullable();
             $table->integer('net_weight')->nullable();

@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_options', function (Blueprint $table) {
+        Schema::create('review_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
             $table->json('name');
-            $table->decimal('price', 8, 2);
-            $table->integer('net_weight');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_options');
+        Schema::dropIfExists('review_types');
     }
 };

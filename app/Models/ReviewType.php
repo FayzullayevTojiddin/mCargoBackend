@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
-class DeliveryType extends Model
+class ReviewType extends Model
 {
     use HasTranslations;
 
     public array $translatable = ['name'];
 
-    protected $fillable = [
-        'name',
-    ];
+    protected $fillable = ['name'];
 
-    public function deliveries(): HasMany
+    public function reviews(): HasMany
     {
-        return $this->hasMany(Delivery::class);
+        return $this->hasMany(Review::class);
     }
 }

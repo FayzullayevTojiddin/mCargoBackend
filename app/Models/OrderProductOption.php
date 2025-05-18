@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class OrderProductOption extends Model
 {
+    use HasTranslations;
+
+    public array $translatable = ['name'];
+
     protected $fillable = [
         'order_product_item_id',
         'product_option_id',

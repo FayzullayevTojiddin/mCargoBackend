@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_options', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->json('name');
-            $table->decimal('price', 8, 2);
-            $table->integer('net_weight');
+            $table->foreignId('review_type_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->string('value')->nullable();
+            $table->integer('score')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_options');
+        Schema::dropIfExists('reviews');
     }
 };

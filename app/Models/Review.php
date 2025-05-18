@@ -4,23 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Translatable\HasTranslations;
 
-class Restauran extends Model
+class Review extends Model
 {
-    use HasTranslations;
-
-    public array $translatable = [
-        'name',
-        'description',
-    ];
-
     protected $fillable = [
+        'review_type_id',
         'user_id',
-        'review',
-        'name',
-        'description'
+        'value',
+        'score',
     ];
+
+    public function reviewType(): BelongsTo
+    {
+        return $this->belongsTo(ReviewType::class);
+    }
 
     public function user(): BelongsTo
     {
