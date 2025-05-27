@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
 {
-    use HasTranslations;
+    use HasTranslations, HasFactory;
 
     public array $translatable = [
         'name',
@@ -20,16 +23,14 @@ class Product extends Model
         'restaurant_id',
         'product_category_id',
         'name',
-        'review',
         'description',
         'price',
         'icon',
         'net_weight'
     ];
-
     public function restaurant(): BelongsTo
     {
-        return $this->belongsTo(Restauran::class);
+        return $this->belongsTo(Restaurant::class);
     }
 
     public function category(): BelongsTo
@@ -40,5 +41,20 @@ class Product extends Model
     public function options(): HasMany
     {
         return $this->hasMany(ProductOption::class);
+    }
+
+    public function discount(): HasOne
+    {
+        return $this->hasOne(ProductDiscount::class);
+    }
+
+    public function image(): BelongsTo
+    {
+        return $this->belongsTo(Image::class);
+    }
+
+    public function reviews(): MorphMany
+    {
+        return $this->morphMany(Review::class, 'reviewable');
     }
 }

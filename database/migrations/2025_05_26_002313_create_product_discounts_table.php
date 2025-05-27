@@ -6,23 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('review_types', function (Blueprint $table) {
+        Schema::create('product_discounts', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
+            $table->foreignId('product_id')->constrained('products');
+            $table->integer('percent')->nullable();
+            $table->integer('discount_price')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('review_types');
+        Schema::dropIfExists('product_discounts');
     }
 };

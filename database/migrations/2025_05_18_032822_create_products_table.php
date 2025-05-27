@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('restaurant_id')->constrained();
             $table->foreignId('product_category_id')->constrained();
-            $table->decimal('review', 2, 1)->nullable();
             $table->json('name');
             $table->json('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();

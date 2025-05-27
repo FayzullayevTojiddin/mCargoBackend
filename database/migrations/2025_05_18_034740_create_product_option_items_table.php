@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_option_id')->constrained();
             $table->json('name');
+            $table->integer('net_weight')->nullable();
             $table->timestamps();
         });
     }

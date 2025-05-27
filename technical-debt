@@ -1,0 +1,12 @@
+
+
+TODO: Categories nomini menyuga o'zgartirish kerak !
+TODO: Addresslarni agar ko'payib ketish ehtimoli bor bo'ladigan bo'lsa unda Address nomli ustun ochilishi kerak !
+TODO: Description va namelarning barchasini uz va ru, en [] da kelishi kerak bo'lishi mumkin ! Hisobga olish kerak!
+TODO: Restaranlarni filterlab chaqirishni qilish kerak ! Misol uchun eng yaqinlari.
+TODO: ProductDiscount sozlash kerak, bir seeder yozib keyin productga qo'shib qo'yish kerak. Controller ichida resourceda ham sozlash kerak. Chunki hozir - 6 orqali response qaytaradi
+TODO: Agar Productning vazni 1000g dan oshsa uni kgda chiqarish kerak !
+TODO: Message ham yaratib qo'shish kerak Restaurantga ! Agar zarur bo'lsa
+TODO: Image yaratishni sozlash lozim. User xoxlaganicha rasm yuklay olishi kerak emas !
+TODO: Productlarni categories bo'yicha saralab olib kelish kerak ProductController sozlash kerak buning uchun !
+TODO:

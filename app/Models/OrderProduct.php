@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrderProduct extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'restaurant_id',
@@ -37,7 +40,7 @@ class OrderProduct extends Model
 
     public function restaurant(): BelongsTo
     {
-        return $this->belongsTo(Restauran::class);
+        return $this->belongsTo(Restaurant::class);
     }
 
     public function products(): HasMany

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->json('name');
             $table->decimal('price', 8, 2);
-            $table->integer('net_weight');
             $table->timestamps();
         });
     }
