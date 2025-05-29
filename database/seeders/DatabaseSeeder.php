@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
             UserCardSeeder::class,
             PaymentTypeSeeder::class,
             PaymentSeeder::class,
+            DeliveryTypeSeeder::class,
+            CourierSeeder::class,
         ]);
     }
 }

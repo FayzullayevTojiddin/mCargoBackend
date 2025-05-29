@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserCardRequest;
 use App\Http\Requests\UserCardStoreRequest;
 use App\Http\Resources\UserCardResource;
 use App\Models\UserCard;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserCardController extends Controller
 {
@@ -34,6 +34,15 @@ class UserCardController extends Controller
 
         return $this->error(
             message: "User card not created", data: $card->toResource()->toArray(request())
+        );
+    }
+
+    public function update(UpdateUserCardRequest $request, $userCardId): JsonResponse
+    {
+        $userCard = UserCard::findOrFail($userCardId);
+        $userCard->update($request->validated());
+        return $this->success(
+            message: "User card updated", data: $userCard->toResource()->toArray(request())
         );
     }
 

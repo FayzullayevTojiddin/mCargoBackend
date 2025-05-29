@@ -13,7 +13,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('payment_type_id')->constrained();
             $table->foreignId('user_card_id')->constrained();
-            $table->decimal('delivery_price', 8, 2)->default(0);
             $table->decimal('total_price', 8, 2);
             $table->string('status')->default('pending');
             $table->timestamps();

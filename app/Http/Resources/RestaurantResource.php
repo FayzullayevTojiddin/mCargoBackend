@@ -18,6 +18,10 @@ class RestaurantResource extends JsonResource
                 'reviews_average' => round($this->reviews->avg('score'), 1),
             ],
             'image' => Image::find($this->image_id)->path,
+            'address' => [
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude
+            ]
         ];
     }
 }

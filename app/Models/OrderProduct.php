@@ -13,7 +13,6 @@ class OrderProduct extends Model
 
     protected $fillable = [
         'user_id',
-        'restaurant_id',
         'payment_id',
         'delivery_id',
         'number',
@@ -36,11 +35,6 @@ class OrderProduct extends Model
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class);
-    }
-
-    public function restaurant(): BelongsTo
-    {
-        return $this->belongsTo(Restaurant::class);
     }
 
     public function products(): HasMany

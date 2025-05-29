@@ -15,13 +15,12 @@ class Payment extends Model
         'user_id',
         'payment_type_id',
         'user_card_id',
-        'delivery_price',
         'total_price',
         'status',
     ];
 
     protected $casts = [
-        'payment_status' => PaymentStatus::class,
+        'status' => PaymentStatus::class,
     ];
 
     public function userCard(): BelongsTo

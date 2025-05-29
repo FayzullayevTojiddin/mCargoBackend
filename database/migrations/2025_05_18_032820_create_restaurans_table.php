@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->timestamps();
             $table->unique(['user_id', 'latitude', 'longitude']);
+            $table->index(['latitude', 'longitude']);
+            $table->softDeletes();
         });
     }
 
