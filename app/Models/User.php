@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, HasLocation;
 
     protected $fillable = [
         'image_id',
@@ -69,5 +70,15 @@ class User extends Authenticatable
     public function courier(): HasOne
     {
         return $this->HasOne(Courier::class);
+    }
+
+    public function orderProducts(): HasMany
+    {
+        return $this->HasMany(OrderProduct::class);
+    }
+
+    public function deliveries(): HasMany
+    {
+        return $this->HasMany(Delivery::class);
     }
 }

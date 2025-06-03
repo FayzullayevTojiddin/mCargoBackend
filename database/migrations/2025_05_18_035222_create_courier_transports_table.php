@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('courier_id')->constrained();
             $table->foreignId('courier_transport_type_id')->constrained();
             $table->string('number')->nullable();
-            $table->json('details')->nullable();
+            $table->string('details')->nullable();
             $table->timestamps();
         });
     }

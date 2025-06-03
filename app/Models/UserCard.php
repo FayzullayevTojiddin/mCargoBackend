@@ -15,10 +15,14 @@ class UserCard extends Model
     protected $fillable = [
         'user_id',
         'card_type_id',
-        'placeholder_name',
-        'number',
+        'masked_number',
         'exp_date',
-        'cvv'
+        'token',
+        'verified'
+    ];
+
+    protected $casts = [
+        'verified' => 'boolean',
     ];
 
     public function user(): BelongsTo

@@ -37,14 +37,14 @@ class UserCardController extends Controller
         );
     }
 
-    public function update(UpdateUserCardRequest $request, $userCardId): JsonResponse
-    {
-        $userCard = UserCard::findOrFail($userCardId);
-        $userCard->update($request->validated());
-        return $this->success(
-            message: "User card updated", data: $userCard->toResource()->toArray(request())
-        );
-    }
+//    public function update(UpdateUserCardRequest $request, $userCardId): JsonResponse
+//    {
+//        $userCard = UserCard::findOrFail($userCardId);
+//        $userCard->update($request->validated());
+//        return $this->success(
+//            message: "User card updated", data: $userCard->toResource()->toArray(request())
+//        );
+//    }
 
     public function destroy($userCardId): JsonResponse
     {

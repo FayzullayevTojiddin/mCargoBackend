@@ -8,17 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('couriers', function (Blueprint $table) {
+        Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->decimal('latitude', 9, 2);
-            $table->decimal('longitude', 9, 2);
+            $table->morphs('logable');
+            $table->morphs('performable');
+            $table->string('action');
+            $table->string('notes')->nullable();
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('couriers');
+        Schema::dropIfExists('logs');
     }
 };

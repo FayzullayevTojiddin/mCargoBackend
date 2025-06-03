@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\CardType;
 use App\Models\User;
 use App\Models\UserCard;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserCardSeeder extends Seeder

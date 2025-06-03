@@ -59,6 +59,6 @@ class UserController extends Controller
     public function getUser(Request $request): JsonResponse
     {
         $user = auth()->user();
-        return $this->response($user->toArray());
+        return $this->response($user->toResource()->toArray(request()));
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexCourierRequest;
+use App\Http\Requests\StoreCourierRequest;
+use App\Http\Resources\CourierResource;
 use App\Models\Courier;
 use App\Services\CourierService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CourierController extends Controller
 {
@@ -17,18 +19,43 @@ class CourierController extends Controller
         $this->authorizeResource(Courier::class);
     }
 
-    public function index(Request $request, CourierService $courierService): JsonResponse
+    public function index(IndexCourierRequest $request, CourierService $courierService): JsonResponse
     {
-        $request->validate([
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-        ]);
+        $couriers = $courierService->getNearestCouriers(...$request->validated());
 
-        $couriers = $courierService->getNearestCouriers(
-            $request->input('latitude'),
-            $request->input('longitude')
+        return $this->response(
+            data: CourierResource::collection($couriers)->toArray(request()),
         );
+    }
 
-        return response()->json($couriers);
+    public function store(StoreCourierRequest $request): JsonResponse
+    {
+        $courier = Courier::create($request->validated());
+        return $this->success(
+            message: 'Courier created successfully',
+            data: $courier->toResource()->toArray(request()),
+        );
+    }
+
+    public function show(Courier $courier): JsonResponse
+    {
+        return $this->response(
+            data: $courier->toResource()->toArray(request()),
+        );
+    }
+
+    public function destroy(Courier $courier): JsonResponse
+    {
+        if($courier->delete()){
+            return $this->success(
+                message: 'Courier deleted successfully',
+                data: $courier->toResource()->toArray(request()),
+            );
+        }
+
+        return $this->error(
+            message: 'Courier not deleted',
+            data: $courier->toResource()->toArray(request()),
+        );
     }
 }

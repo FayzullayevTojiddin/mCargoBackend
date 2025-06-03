@@ -12,7 +12,7 @@ class ReviewSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = User::factory(20)->create();
+        $users = User::all();
         $restaurants = Restaurant::all();
         foreach ($restaurants as $restaurant) {
             foreach ($users as $user) {

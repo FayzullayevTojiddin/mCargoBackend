@@ -12,12 +12,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('card_type_id')->constrained();
-            $table->string('placeholder_name')->nullable();
-            $table->string('number')->nullable();
+            $table->string('token')->unique();
+            $table->string('masked_number')->nullable();
             $table->string('exp_date')->nullable();
-            $table->string('cvv')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
-            $table->unique(['user_id', 'number']);
             $table->softDeletes();
         });
     }

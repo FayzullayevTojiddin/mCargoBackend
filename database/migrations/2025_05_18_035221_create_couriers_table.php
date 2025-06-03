@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('courier_transport_types', function (Blueprint $table) {
+        Schema::create('couriers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('icon')->nullable();
-            $table->integer('km_h')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->decimal('balance', 15, 2)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('courier_transport_types');
+        Schema::dropIfExists('couriers');
     }
 };

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocation;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +14,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Restaurant extends Model
 {
-    use HasTranslations, HasFactory, SoftDeletes;
+    use HasTranslations, HasFactory, SoftDeletes, HasLocation;
 
     public array $translatable = [
         'name',
@@ -25,8 +27,6 @@ class Restaurant extends Model
         'name',
         'description',
         'address',
-        'latitude',
-        'longitude',
     ];
 
     public function user(): BelongsTo
@@ -51,17 +51,5 @@ class Restaurant extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
-    }
-
-    public function scopeNearby($query, $latitude, $longitude, $radius = 10)
-    {
-        return $query->selectRaw("*,
-        (6371 * acos(
-            cos(radians(?)) * cos(radians(latitude)) *
-            cos(radians(longitude) - radians(?)) +
-            sin(radians(?)) * sin(radians(latitude))
-        )) AS distance", [$latitude, $longitude, $latitude])
-            ->having('distance', '<=', $radius)
-            ->orderBy('distance');
     }
 }

@@ -9,10 +9,15 @@ class UserCardFactory extends Factory
     public function definition(): array
     {
         return [
-            'placeholder_name' => $this->faker->name(),
-            'number' => $this->faker->creditCardNumber(),
+            'masked_number' => $this->maskCardNumber($this->faker->creditCardNumber()),
             'exp_date' => $this->faker->creditCardExpirationDateString(),
-            'cvv' => $this->faker->numberBetween(100, 999),
+            'token' => $this->faker->uuid(),
+            'verified' => $this->faker->boolean(),
         ];
+    }
+
+    function maskCardNumber(string $number): string
+    {
+        return substr($number, 0, 4) . str_repeat('*', strlen($number) - 8) . substr($number, -4);
     }
 }

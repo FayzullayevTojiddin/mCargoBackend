@@ -14,10 +14,8 @@ class UserCardStoreRequest extends FormRequest
     {
         return [
             'card_type_id'      => ['required', 'exists:card_types,id'],
-            'placeholder_name'  => ['nullable', 'string', 'max:255'],
-            'number'            => ['required', 'string', 'max:32', 'unique:user_cards,number,NULL,id,user_id,' . $this->user()->id],
+            'mask_number'            => ['required', 'string', 'max:32', 'unique:user_cards,number,NULL,id,user_id,' . $this->user()->id],
             'exp_date'          => ['required', 'string', 'max:7'],
-            'cvv'               => ['nullable', 'string', 'max:4'],
         ];
     }
 }

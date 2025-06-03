@@ -22,8 +22,6 @@ class RestaurantFactory extends Factory
             'user_id' => User::factory()->create()->id,
             'image_id' => Image::factory()->create()->id,
             'address' => $this->faker->address(),
-            'latitude' => $this->faker->latitude(),
-            'longitude' => $this->faker->longitude(),
         ];
     }
 }

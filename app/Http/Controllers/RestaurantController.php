@@ -6,6 +6,7 @@ use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantResource;
 use App\Http\Resources\RestaurantShowResource;
+use App\Models\Location;
 use App\Models\Restaurant;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,16 +20,20 @@ class RestaurantController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $lat = $request->input('latitude');
-        $lng = $request->input('longitude');
-        $radius = $request->radius ?? 10;
+        $userLocation = auth()->user()->location;
+        $lat = $userLocation->latitude;
+        $lng = $userLocation->longitude;
+        $radius = $request->input('radius', 10000);
+
         if ($lat && $lng) {
-            $restaurants = Restaurant::nearby($lat, $lng, $radius)->get();
-        }else{
-            $restaurants = Restaurant::all();
+            $restaurantIds = $restaurantIds = Location::nearby($lat, $lng, $radius)->pluck('locationable_id');;
+            $restaurants = Restaurant::with('location')->whereIn('id', $restaurantIds)->get();
+        } else {
+            $restaurants = Restaurant::with('location')->get();
         }
+
         return $this->response(
-            RestaurantResource::collection($restaurants)->toArray(request())
+            RestaurantResource::collection($restaurants)->toArray($request)
         );
     }
 

@@ -2,20 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\Courier;
+use App\Models\Delivery;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CourierPolicy
+class DeliveryPolicy
 {
     public function viewAny(User $user): bool
     {
         return true;
     }
 
-    public function view(User $user, Courier $courier): bool
+    public function view(User $user, Delivery $delivery): bool
     {
-        return true;
+        return $user->id == $delivery->user_id;
     }
 
     public function create(User $user): bool
@@ -23,22 +23,22 @@ class CourierPolicy
         return $user->userRole->code === 'admin';
     }
 
-    public function update(User $user, Courier $courier): bool
+    public function update(User $user, Delivery $delivery): bool
     {
         return $user->userRole->code === 'admin';
     }
 
-    public function delete(User $user, Courier $courier): bool
+    public function delete(User $user, Delivery $delivery): bool
     {
         return $user->userRole->code === 'admin';
     }
 
-    public function restore(User $user, Courier $courier): bool
+    public function restore(User $user, Delivery $delivery): bool
     {
         return $user->userRole->code === 'admin';
     }
 
-    public function forceDelete(User $user, Courier $courier): bool
+    public function forceDelete(User $user, Delivery $delivery): bool
     {
         return $user->userRole->code === 'admin';
     }

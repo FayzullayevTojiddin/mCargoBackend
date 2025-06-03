@@ -18,8 +18,7 @@ class UpdateUserCardRequest extends FormRequest
     {
         return [
             'card_type_id' => ['required', 'exists:card_types,id'],
-            'placeholder_name' => ['nullable', 'string', 'max:255'],
-            'number' => [
+            'mask_number' => [
                 'nullable',
                 'string',
                 'max:255',
@@ -28,7 +27,6 @@ class UpdateUserCardRequest extends FormRequest
                     ->ignore($this->route('user_card')),
             ],
             'exp_date' => ['nullable', 'string', 'max:10'],
-            'cvv' => ['nullable', 'string', 'max:10'],
         ];
     }
 }

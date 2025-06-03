@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CourierController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeliveryTypeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
@@ -41,4 +42,5 @@ Route::apiResources(array(
     'cart' => CartController::class,
     'delivery-types' => DeliveryTypeController::class,
     'couriers' => CourierController::class,
+    'deliveries' => DeliveryController::class,
 ));

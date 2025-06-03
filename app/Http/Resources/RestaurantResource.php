@@ -10,6 +10,9 @@ class RestaurantResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $userLocation = $request->user()->location;
+        $restaurantLocation = $this->location;
+        $estimateTime = estimateTime($userLocation->latitude, $restaurantLocation->longitude, $restaurantLocation->latitude, $restaurantLocation->longitude);
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -18,10 +21,8 @@ class RestaurantResource extends JsonResource
                 'reviews_average' => round($this->reviews->avg('score'), 1),
             ],
             'image' => Image::find($this->image_id)->path,
-            'address' => [
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-            ]
+            'location' => new LocationResource($this->location),
+            'estimate_time' => $estimateTime,
         ];
     }
 }
